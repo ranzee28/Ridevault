@@ -70,7 +70,6 @@ export default function Login() {
   const [isHoveringSubmit, setIsHoveringSubmit] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [activeRole, setActiveRole] = useState<'user' | 'admin'>('user');
   const [activeBikeIndex, setActiveBikeIndex] = useState(0);
   
   const { t } = useLanguage();
@@ -103,19 +102,10 @@ export default function Login() {
             .eq('id', sessionUser.id)
             .single();
 
-          if (activeRole === 'admin') {
-            if (profile?.role === 'admin') {
-              navigate('/admin');
-            } else {
-              await supabase.auth.signOut();
-              throw new Error('Akun Anda tidak terdaftar sebagai Administrator.');
-            }
+          if (profile?.role === 'admin') {
+            navigate('/admin');
           } else {
-            if (profile?.role === 'admin') {
-              navigate('/admin');
-            } else {
-              navigate('/');
-            }
+            navigate('/');
           }
         } else {
           navigate('/');
@@ -527,37 +517,7 @@ export default function Login() {
                 {/* Subtle light leak inside form box */}
                 <div className="absolute top-[-30%] right-[-30%] w-48 h-48 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none"></div>
 
-                {/* Role Switcher (User / Admin Toggle) */}
-                <div className="mb-8 flex justify-end">
-                  <div className="bg-[#121212] p-1 rounded-full border border-white/5 flex relative w-48">
-                    <motion.div
-                      className="absolute top-1 bottom-1 left-1 bg-[#D4AF37] rounded-full z-0"
-                      layoutId="roleActive"
-                      initial={false}
-                      animate={{
-                        x: activeRole === 'admin' ? 92 : 0,
-                        width: 92
-                      }}
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setActiveRole('user')}
-                      className={`relative z-10 flex-1 py-1 rounded-full text-[9px] uppercase tracking-widest font-black flex items-center justify-center gap-1.5 transition-colors duration-300 ${activeRole === 'user' ? 'text-black font-extrabold' : 'text-white/40 hover:text-white/80'}`}
-                    >
-                      <User size={10} /> User
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setActiveRole('admin');
-                      }}
-                      className={`relative z-10 flex-1 py-1 rounded-full text-[9px] uppercase tracking-widest font-black flex items-center justify-center gap-1.5 transition-colors duration-300 ${activeRole === 'admin' ? 'text-black font-extrabold' : 'text-white/40 hover:text-white/80'}`}
-                    >
-                      <Shield size={10} /> Admin
-                    </button>
-                  </div>
-                </div>
+
 
                 {/* Section Title */}
                 <div className="mb-8">
