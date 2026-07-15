@@ -33,6 +33,11 @@ export const BikeProvider = ({ children }: { children: React.ReactNode }) => {
   const [bikes, setBikes] = useState<Bike[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const sanitizeImageUrl = (url: string | null | undefined): string => {
+    if (!url) return '';
+    return url.replace(/^\/?src\/Images\//i, '/Images/');
+  };
+
   // Helper to map DB row keys to Bike model interface
   const mapDbRowToBike = (row: any): Bike => ({
     id: row.id,
@@ -42,12 +47,12 @@ export const BikeProvider = ({ children }: { children: React.ReactNode }) => {
     power: row.power,
     price: Number(row.price),
     status: row.status,
-    image: row.image,
+    image: sanitizeImageUrl(row.image),
     topSpeed: row.top_speed,
     torque: row.torque,
     suspension: row.suspension,
     weight: row.weight,
-    gallery: row.gallery || []
+    gallery: (row.gallery || []).map((img: string) => sanitizeImageUrl(img))
   });
 
   // Helper to map Bike model interface to DB row
@@ -58,12 +63,12 @@ export const BikeProvider = ({ children }: { children: React.ReactNode }) => {
     power: bike.power,
     price: bike.price,
     status: bike.status,
-    image: bike.image,
+    image: sanitizeImageUrl(bike.image),
     top_speed: bike.topSpeed,
     torque: bike.torque,
     suspension: bike.suspension,
     weight: bike.weight,
-    gallery: bike.gallery
+    gallery: (bike.gallery || []).map((img: string) => sanitizeImageUrl(img))
   });
 
   const loadBikes = async () => {
