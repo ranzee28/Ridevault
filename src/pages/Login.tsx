@@ -28,7 +28,7 @@ import { supabase } from '../lib/supabase';
 const SHOWCASE_BIKES = [
   {
     name: 'Kawasaki Ninja H2',
-    image: '/src/Images/KawasakiH2.png',
+    image: '/Images/KawasakiH2.png',
     specs: {
       engine: '998cc Supercharged',
       power: '228 HP',
@@ -39,7 +39,7 @@ const SHOWCASE_BIKES = [
   },
   {
     name: 'Ducati Panigale V4 R',
-    image: '/src/Images/Panigale-V4-R.png',
+    image: '/Images/Panigale-V4-R.png',
     specs: {
       engine: '998cc Desmosedici',
       power: '218 HP',
@@ -50,7 +50,7 @@ const SHOWCASE_BIKES = [
   },
   {
     name: 'BMW S1000RR M Sport',
-    image: '/src/Images/BMWS1000RR4.png',
+    image: '/Images/BMWS1000RR4.png',
     specs: {
       engine: '999cc ShiftCam I4',
       power: '205 HP',

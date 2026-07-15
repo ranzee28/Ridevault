@@ -102,7 +102,7 @@ export default function FleetTab() {
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">Image URL</label>
-                  <input type="text" required value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} className="w-full bg-black/50 border border-white/10 rounded-sm p-3 text-sm focus:border-[#D4AF37] focus:outline-none transition-colors text-white" placeholder="/src/Images/placeholder.png" />
+                  <input type="text" required value={formData.image} onChange={e => setFormData({...formData, image: e.target.value})} className="w-full bg-black/50 border border-white/10 rounded-sm p-3 text-sm focus:border-[#D4AF37] focus:outline-none transition-colors text-white" placeholder="/Images/placeholder.png" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-widest text-white/50 mb-2">Top Speed</label>
